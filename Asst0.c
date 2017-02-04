@@ -1,60 +1,76 @@
+/*
+ *Daniel Finlay
+ *Seong Sohn
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
 #include <ctype.h>
 
-//Identity: every string inputted is outputted
-//Uniqueness: each distinct string is outputted
-
-// To append character by character until a token is hit & then terminate to a string
-void append(char* s, char c)
+int main(int argc, char* argv[]) 
 {
-  int len = strlen(s);
-  s[len] = c;
-  s[len + 1] = '\0';
-}
 
-int main(int argc, char* argv[]) // argc = # args on command line //argv[] values at locations 
-{
-  int index = 1;                 // For iterating through command line arguments
-  char *sentence = NULL;         // To store a whole string at each argv[index]
-  char *word = NULL;             // To store each word separated by tokens
-  char *letter = NULL;           // To go letter by letter through a sentence until a token is hit, then terminate into a word & sort in linked list
-  char *tokenArray = 
-  int length = 0;                // to get length of argv[index]
-  int iterateStr = 0;            // To iterate through a "sentence"
-  int tokenFound = 1;            // True = 0, False = 1 // Boolean to tell if a token has been found
+  //Below are self-documenting variables.
+  int inputStringIndex = 0;
+  char *inputString = argv[1];
+  char *sentence = "";
+  char *word = "";
+  char delimiters[] = " 1234567890!@#$%^&*()`~-_=+[{]}\\|;:',<.>/?\n\t\r\v\f";
+  int inputStringLength = strlen(argv[1]);
+  int sentenceIndex = 0;
+  int tokenArrayIndex = 0;
+  int tokenCount = 1;
+  int sortHelpingVariable = 0;
+  char *tokenArray[inputStringLength];
+  char *temporaryVariable = "";
  
-  if(argc != 2) {
+  //Check for correct input format. Upon incorrect entry, notification of false input and correct format is output.
+  if(argc != 2)
+  {
     printf("False input. Correct format: ./pointersorter \"<input>\"\n");
     return 0;
   }
 
- for(index = 1; index < argv[1]; index++)               // Iterate through each element on command line
- {
-   length = strlen(argv[index]);                    // Get Length of each input
-   sentence = (char*) malloc(sizeof(argv[index]));  // Allocate the memory for the size of a sentence at "index"
-   strcpy(sentence, argv[index]);                   // Copy the command line string into a char array named "sentence"
-   word = (char*)malloc(sizeof(sentence));          // Allocate enough memory in case the sentence is one word   
-   
-   while(iterateStr < length)                       // Iterate through the sentence & concatenate each letter until a token is found, then sort it. If no Token found then sort & move on to next sentence at top of for loop
-   {
-    letter = sentence[iterateStr];                  // Iterate string char by char until token found and store in letter
-    tokenFound = isalpha(letter);                   // Test letter by letter whether it is alphabetic
-    if(tokenFound == 0)                             // Is a token
-    {
-      free(word);                                   // Free allocated memory
-      word = (char*)malloc(sizeof(sentence));       // Allocate memory for next word
-    }
-    else                                            // Is a letter
-    {
-     append(word, letter);                          // Add each letter to the word until a token is hit or the end of the sentence is reached
-    }
-   
-    iterateStr++;                                   // Go to next letter in sentence
-   }
-   printf("%s\n", word);                            // JUST TO SEE HOW IT'S WORKING SO FAR************// "COMMENT"
-   iterateStr = 0;                                  // New sentence: reset to 0
-  }
-}
+  //Allocate memory of size of the input string's length to "sentence".
+  sentence = (char*) malloc(sizeof(inputStringLength));
 
+  //Copy the input string into sentence to prevent changing of argv[1].
+  strcpy(sentence, argv[1]);
+
+  //Allocate memory of same size as before to "word" since the number of words in a given string will never exceed the number of characters given in the same string.
+  word = (char*)malloc(sizeof(sentence));
+
+  //Tokenize the sentence and store first token into "word".
+  word = strtok(sentence, delimiters);
+
+  //Traverse through the rest of the tokens and return null pointer once done.
+  while(word != NULL)                   
+  {
+    tokenArray[tokenArrayIndex] = word;
+    word = strtok(NULL, delimiters);
+    tokenArrayIndex++;
+    tokenCount++;
+  }
+
+  //Sort tokens by comparing subsequent values and switching if the 2nd token is alphabetically higher (Example: a over f).
+  for(tokenArrayIndex = 0; tokenArrayIndex < tokenCount; tokenArrayIndex++)       
+  {
+    for(sortHelpingVariable = tokenArrayIndex + 1; sortHelpingVariable < tokenCount; sortHelpingVariable++) 
+    {
+      if(strcmp(tokenArray[tokenArrayIndex], tokenArray[sortHelpingVariable]) > 0)
+      {
+        strcpy(temporaryVariable, tokenArray[tokenArrayIndex]);
+        strcpy(tokenArray[tokenArrayIndex], tokenArray[sortHelpingVariable]);
+        strcpy(tokenArray[sortHelpingVariable], temporaryVariable);
+      }
+    }
+  }
+
+  //Print out all the words.
+  for(tokenArrayIndex = 0; tokenArrayIndex < tokenCount; tokenArrayIndex++)
+  {
+    printf("%s\n", tokenArray[tokenArrayIndex]);
+  }
+  return 0;
+}
