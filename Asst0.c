@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
   }
   //Below are self-documenting variables.
   char *sentence = NULL;
-  char *word = NULL;
+  char *word;
   char delimiters[] = " 1234567890!@#$%^&*()`~-_=+[{]}|;:',<.>/?\\";
   int inputStringLength = strlen(argv[1]);
   int tokenArrayIndex = 0;
@@ -72,9 +72,9 @@ int main(int argc, char* argv[])
   
   //Sort tokens by comparing subsequent values and switching if the 2nd token is alphabetically higher (Example: a over f).
 
-   for(tokenArrayIndex = 0; tokenArrayIndex < tokenCount+1; tokenArrayIndex++)       
+   for(tokenArrayIndex = 0; tokenArrayIndex < tokenCount; tokenArrayIndex++)       
    {
-     for(sortHelpingVariable = tokenArrayIndex + 1; sortHelpingVariable < tokenCount+1; sortHelpingVariable++) 
+     for(sortHelpingVariable = tokenArrayIndex + 1; sortHelpingVariable < tokenCount; sortHelpingVariable++) 
      {
        if(strcmp(tokenArray[tokenArrayIndex], tokenArray[sortHelpingVariable]) > 0)
        {
