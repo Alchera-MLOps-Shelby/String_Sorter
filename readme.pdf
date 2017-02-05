@@ -1,0 +1,13 @@
+Systems Programming
+Section 01
+
+Daniel Finlay
+Seong Sohn
+
+The pointersorter.c file is a c program designed to take as input a single string of words, separated by non-alphabetical characters. It first checks if the correct input format is given: 
+
+	./pointersorter "<input>""
+
+	example: ./pointersorter "The cake is a lie."
+
+It returns a warning for improper format to notify the user of the error and the correct way to input. After correct input format is given, the program reads the input string, copies it into a dynamically allocated character array "sentence" to hold the string, then allocates a second character array "word" before tokenizing "sentence" and storing the tokens into "word". These tokens are stored into an array called "tokenArray" before a simple sorting algorithm using strcmp() of subsequent array elements is performed. A final loop through the array then prints out the sorted words line by line.

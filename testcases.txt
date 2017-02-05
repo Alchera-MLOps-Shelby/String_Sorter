@@ -1,0 +1,42 @@
+./pointersorter 
+False input. Correct format: ./pointersorter "<input>"
+
+./pointersorter ""
+
+
+./pointersorter "QWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"
+QWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
+
+./pointersorter "12345 145345325 ?><>?<>"
+
+./pointersorter "7safoi8dff89dsf8dsf7sdf75f7sd7fs7df7sdf96sdfs8d6f45sfd7848sf"
+d
+df
+dff
+dsf
+dsf
+f
+f
+fs
+safoi
+sd
+sdf
+sdf
+sdfs
+sf
+sfd
+
+./pointersorter "?!  KhGugyf4JGUYTF+=-nhht a a ab ac A AC DfOEIj 8F0Fdf"
+A
+AC
+DfOEIj
+F
+Fdf
+JGUYTF
+KhGugyf
+a
+a
+ab
+ac
+nhht
+
