@@ -100,6 +100,7 @@ int main(int argc, char* argv[])
     //printf("printed token\n");
   }
   //printf("exit main\n");
+  printf("\n");
   free(word);
   free(sentence);
   return 0;
